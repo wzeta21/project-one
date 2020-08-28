@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Task } from '../models/task';
+import { TaskLog } from '../models/taskLog';
 import { HttpClient } from '@angular/common/http';
 import { BaseUrl } from '../base-url';
 
@@ -14,9 +15,14 @@ export class TasksService {
   ) { }
 
   public create(taskInfo: Task) {
-    return this.http.post('http://localhost:8000/api/tasks/', taskInfo);
+    return this.http.post(`${BaseUrl}/api/tasks/`, taskInfo);
   }
+  
+  public createLog(taskLogInfo: TaskLog) {
+    return this.http.post(`${BaseUrl}/api/task-logs/`, taskLogInfo);
+  }
+
   public list() {
-    return this.http.get<Task[]>('http://localhost:8000/api/tasks/');
+    return this.http.get<Task[]>(`${BaseUrl}/api/tasks/`);
   }
 }
